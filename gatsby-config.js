@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Junyi Academy Developer Guide`,
-    description: `This site should guide you through the steps of contributing to Junyi Acesemy. Welcome, we're delighted to see you! :)`,
+    description: `This site should guide you through the steps of contributing to Junyi Academy. Welcome, we're delighted to see you! :)`,
     author: `@wtlin1228`,
   },
   plugins: [

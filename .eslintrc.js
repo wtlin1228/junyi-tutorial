@@ -1,6 +1,7 @@
 module.exports = {
   env: {
     browser: true,
+    es2021: true,
     es6: true,
     node: true,
   },
@@ -18,7 +19,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 12,
     sourceType: "module",
   },
   plugins: ["react"],
