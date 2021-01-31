@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Junyi Academy Developer Guide`,
+    description: `This site should guide you through the steps of contributing to Junyi Acesemy. Welcome, we're delighted to see you! :)`,
+    author: `@wtlin1228`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -11,6 +11,21 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `docs`,
+        path: `${__dirname}/docs`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        defaultLayouts: {
+          default: require.resolve("./src/components/layout.js"),
+        },
       },
     },
     `gatsby-transformer-sharp`,
