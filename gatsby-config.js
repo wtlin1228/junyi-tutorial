@@ -21,10 +21,10 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-mdx",
+      resolve: `gatsby-plugin-mdx`,
       options: {
         defaultLayouts: {
-          default: require.resolve("./src/components/layout.js"),
+          default: require.resolve(`./src/components/layout.js`),
         },
       },
     },
@@ -42,6 +42,7 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-emotion`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
