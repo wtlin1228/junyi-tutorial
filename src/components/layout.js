@@ -7,14 +7,29 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
+import { Global, ThemeProvider, css } from "@emotion/react"
 
+// components
 import Header from "./header"
-import "./layout.css"
+import MenuLink from "./menuLink"
 
 import { buildMenuData } from "../../utils/build-menu-data"
 
-const Layout = ({ children }) => {
+const theme = {
+  colors: {
+    primaryLight: `#b5ffff`,
+    primary: `#7ff0ff`,
+    primaryDark: `#46bdcc`,
+    textOnPrimary: `#a56277`,
+    secondaryLight: `#ffff80`,
+    secondary: `#f4ef4c`,
+    secondaryDark: `#bebd02`,
+    textOnSecondary: `#e27175`,
+  },
+}
+
+const Layout = ({ currentPath, children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -37,52 +52,119 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title || `Title`} />
-      <div
-        style={{
-          display: "flex",
-        }}
-      >
+      <Global
+        styles={css`
+          * {
+            box-sizing: border-box;
+            margin: 0;
+          }
+
+          * + * {
+            margin-top: 1rem;
+          }
+
+          html,
+          body {
+            margin: 0;
+            color: #555;
+            font-family: --apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+              Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+              sans-serif;
+            font-size: 18px;
+            line-height: 1.4;
+
+            /* remove margin for the main div that Gatsby mounts into */
+            > div {
+              margin-top: 0;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+              color: #222;
+              line-height: 1.1;
+
+              + * {
+                margin-top: 0.5rem;
+              }
+            }
+
+            strong {
+              color: #222;
+            }
+
+            li {
+              margin-top: 0.25rem;
+            }
+          }
+        `}
+      />
+      <ThemeProvider theme={theme}>
+        <Header siteTitle={data.site.siteMetadata.title || `Title`} />
         <div
           style={{
-            width: 300,
+            display: "flex",
           }}
         >
-          {menuData.map(({ title, items }) => (
-            <div key={`${title}`}>
-              <div>{title}</div>
-              {items.map(({ title: subTitle, path }) => (
-                <div key={path}>
-                  <Link to={path}>{subTitle}</Link>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0 1.0875rem 1.45rem`,
-          }}
-        >
-          <main>{children}</main>
-          <footer
+          <div
             style={{
-              marginTop: `2rem`,
+              width: 250,
+              marginTop: `1rem`,
+              padding: `0 1.0875rem 1.45rem`,
             }}
           >
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.com">Gatsby</a>
-          </footer>
+            <nav>
+              {menuData.map(({ title, items }) => (
+                <div key={`${title}`}>
+                  <div>{title}</div>
+                  <ul
+                    css={css`
+                      list-style: none;
+                      padding-inline-start: 0;
+                    `}
+                  >
+                    {items.map(({ title: subTitle, path }) => (
+                      <MenuLink
+                        key={path}
+                        isActive={currentPath === path}
+                        url={path}
+                        title={subTitle}
+                      />
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </nav>
+          </div>
+          <div
+            style={{
+              maxWidth: 960,
+              padding: `0 1.0875rem 1.45rem`,
+              marginLeft: `3rem`,
+            }}
+          >
+            <main>{children}</main>
+            <footer
+              style={{
+                marginTop: `2rem`,
+              }}
+            >
+              © {new Date().getFullYear()}, Built by
+              {` `}
+              <a href="https://github.com/wtlin1228">wtlin1228</a>
+            </footer>
+          </div>
         </div>
-      </div>
+      </ThemeProvider>
     </>
   )
 }
 
 Layout.propTypes = {
+  currentPath: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 }
 

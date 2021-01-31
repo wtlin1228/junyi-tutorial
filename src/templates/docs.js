@@ -16,8 +16,8 @@ export const query = graphql`
   }
 `
 
-const DocTemplate = ({ data: { mdx: doc } }) => (
-  <Layout>
+const DocTemplate = ({ location, data: { mdx: doc } }) => (
+  <Layout currentPath={location.pathname}>
     <h1>{doc.frontmatter.title}</h1>
     <p>Posted by {doc.frontmatter.author}</p>
     <MDXRenderer>{doc.body}</MDXRenderer>
@@ -26,7 +26,10 @@ const DocTemplate = ({ data: { mdx: doc } }) => (
 )
 
 DocTemplate.propTypes = {
-  data: PropTypes.objectOf({
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+  data: PropTypes.shape({
     mdx: PropTypes.object.isRequired,
   }).isRequired,
 }
