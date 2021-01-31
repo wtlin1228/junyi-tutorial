@@ -23,6 +23,9 @@
   },
   "devDependencies": {
     "cz-conventional-changelog": "3.3.0",
+    "eslint": "7.19.0",
+    "eslint-config-prettier": "7.2.0",
+    "eslint-plugin-react": "7.22.0",
     "husky": "5.0.8",
     "lint-staged": "10.5.3",
     "prettier": "2.2.1"
