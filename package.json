@@ -5,9 +5,12 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@mdx-js/mdx": "1.6.22",
+    "@mdx-js/react": "1.6.22",
     "gatsby": "^2.26.1",
     "gatsby-image": "^2.5.0",
     "gatsby-plugin-manifest": "^2.6.1",
+    "gatsby-plugin-mdx": "1.9.0",
     "gatsby-plugin-offline": "^3.4.0",
     "gatsby-plugin-react-helmet": "^3.4.0",
     "gatsby-plugin-sharp": "^2.8.0",
@@ -19,6 +22,9 @@
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "5.0.8",
+    "lint-staged": "10.5.3",
     "prettier": "2.2.1"
   },
   "keywords": [
@@ -40,5 +46,14 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache",
+    "*.{js,jsx,ts,tsx,json,md,mdx}": "prettier --write"
   }
 }
