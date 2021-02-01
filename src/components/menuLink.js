@@ -12,7 +12,7 @@ import styled from "@emotion/styled"
 // self-defined-configs
 
 // self-defined-components
-const Item = styled.li`
+const LinkWrapper = styled.li`
   position: relative;
 
   ::before {
@@ -33,6 +33,16 @@ const Item = styled.li`
     width: 100%;
   }
 
+  a {
+    color: ${props => (props.isActive ? `white` : `black`)};
+    font-size: 0.875rem;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 0 0.5rem 0.75rem;
+    position: relative;
+    z-index: 10;
+  }
+
   :hover a {
     color: white;
     mix-blend-mode: difference;
@@ -41,22 +51,9 @@ const Item = styled.li`
 
 const MenuLink = ({ isActive, url, title }) => {
   return (
-    <Item isActive={isActive}>
-      <Link
-        to={url}
-        css={{
-          color: `black`,
-          fontSize: `0.875rem`,
-          textDecoration: `none`,
-          display: `block`,
-          padding: `0.5rem 0 0.5rem 0.75rem`,
-          position: `relative`,
-          zIndex: 10,
-        }}
-      >
-        <span>{title}</span>
-      </Link>
-    </Item>
+    <LinkWrapper isActive={isActive}>
+      <Link to={url}>{title}</Link>
+    </LinkWrapper>
   )
 }
 
