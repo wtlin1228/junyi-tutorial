@@ -22,7 +22,7 @@ const Item = styled.li`
     left: 0;
     height: 100%;
     width: ${props => (props.isActive ? `100%` : `3px`)};
-    background-color: ${props => props.theme.colors.primaryLight};
+    background-color: #000000;
     transform: ${props => (props.isActive ? `scaleY(1)` : `scaleY(0)`)};
     transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
       background-color 0.1s;
@@ -31,6 +31,11 @@ const Item = styled.li`
   :hover::before {
     transform: scaleY(1);
     width: 100%;
+  }
+
+  :hover a {
+    color: white;
+    mix-blend-mode: difference;
   }
 `
 

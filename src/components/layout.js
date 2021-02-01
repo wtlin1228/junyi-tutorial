@@ -67,6 +67,10 @@ const Layout = ({ currentPath, children }) => {
           body {
             margin: 0;
             color: #555;
+
+            // Fix mix-blend-mode for cursor on chrome
+            background: #fff;
+
             font-family: --apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
               Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
               sans-serif;
